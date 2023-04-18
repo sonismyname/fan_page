@@ -2,12 +2,17 @@ import { Routes, Route } from "react-router-dom";
 import path from "./utils/path";
 import Home from "./containers/public/Home";
 import Public from "./containers/public/Public";
-import Form from "./components/Form";
+import Form from "./components/Cart";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useDispatch } from "react-redux";
+import * as actions from "./store/actions"
+import Detail from "./components/Detail";
+import FillInfo from "./containers/public/FillInfo";
 
 
 function App() {
+  const dispatch = useDispatch()
   return (
     <>
       <div className="">
@@ -16,8 +21,10 @@ function App() {
             {/* // nằm trong rt khác thì lấy path cha + con */}
             <Route path={path.HOME} element={<Home />}>
               <Route path={path.FORM} element={<Form />}></Route>
+              <Route path={path.DETAIL} element={<Detail />}></Route>
               {/* <Route path={path.HOME} element={<Home />} /> */}
             </Route>
+            <Route path={path.FILLINFOR} element={<FillInfo/>}></Route>
           </Route>
         </Routes>
       </div>

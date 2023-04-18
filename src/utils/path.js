@@ -1,6 +1,9 @@
 const path = {
     PUBLIC: '/',
     HOME: "",
-    FORM: "/form"
+    FORM: "/form",
+    FINTER: "/finter",
+    DETAIL: "/detail",
+    FILLINFOR: "/fillinfomation"
 }
 export default path
