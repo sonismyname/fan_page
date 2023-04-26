@@ -4,7 +4,7 @@ import { Header, Footer } from "../../components/";
 
 const Public = () => {
   return (
-    <div className="flex flex-col overflow-x-hidden">
+    <div className="flex flex-col overflow-x-hidden bg-gray-200">
       <Header />
       <Outlet></Outlet>
       <Footer></Footer>

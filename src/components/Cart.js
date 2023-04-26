@@ -10,21 +10,20 @@ const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
-    console.log("Nộp");
-
-    dispatch(actions.buyProducts({ id: id, name: "bánh quy", price: 1000 }));
+    // dispatch(actions.buyProducts({ id: id, name: "bánh quy", price: 1000 }));
     const form = document.getElementById("form");
     console.log(form);
     form?.classList?.remove("animate-slide-right");
     form?.classList?.add("animate-slide-left");
-    setTimeout(() => {
-      navigate(path.PUBLIC);
-      toast.success("Gửi thành công!!");
+    const idTimOut = setTimeout(() => {
+      navigate(path.FILLINFOR);
+      toast.info("Điền thông tin đơn hàng!!");
+      clearTimeout(idTimOut)
     }, 400);
   };
   const handleDelete = () => {};
   return (
-    <div className="flex h-screen w-auto">
+    <div className="flex h-screen w-auto z-20">
       <div
         onClick={() => {
           navigate(path.PUBLIC);
@@ -45,7 +44,7 @@ const Cart = () => {
           {/* Mỗi sản phẩm là 1 dòng */}
           {[1, 2, 3].map((el, index) => {
             return (
-              <div className="flex w-full text-center">
+              <div key={index} className="flex w-full text-center">
                 {/* ảnh + tên */}
                 <div className="flex w-[30%] gap-2">
                   <img
@@ -71,12 +70,15 @@ const Cart = () => {
             );
           })}
         </div>
-        <div className="flex gap-4 items-center justify-end"> 
-        <span className="text-[20px]">Thành tiền: </span>
-        <span className="text-[20px]">30 000 000 vnđ</span>
-        <button onClick={(e) => {
-          navigate(path.FILLINFOR)
-        }} className="border border-red-500 text-red-500 hover:bg-red-500 hover:text-[#fff] px-5 py-2 mr-10 rounded-[10px]">Mua hàng</button>
+        <div className="flex gap-4 items-center justify-end">
+          <span className="text-[20px]">Thành tiền: </span>
+          <span className="text-[20px]">30 000 000 vnđ</span>
+          <button
+            onClick={handleSubmit}
+            className="border border-red-500 text-red-500 hover:bg-red-500 hover:text-[#fff] px-5 py-2 mr-10 rounded-[10px]"
+          >
+            Mua hàng
+          </button>
         </div>
       </div>
     </div>

@@ -1,3 +1,7 @@
 export { default as Public } from './Public'
 export { default as Home } from './Home'
 export { default as BackArrow } from './BackArrow'
+export { default as Deliver } from './Deliver'
+export { default as DetailDeliver } from './DetailDeliver'
+export { default as Login } from './Login'
+export { default as Dashboard } from './Dashboard'

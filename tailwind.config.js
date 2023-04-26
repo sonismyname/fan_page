@@ -4,10 +4,10 @@ module.exports = {
   theme: {
     extend: {
       backgroundColor: {
-        "main-100": "#E7EDED",
+        "main-100": "#FFFFFF",
         "main-200": "#CED9D9",
         "main-300": "#C0D8D8",
-        "main-400": "#0D7373",
+        "main-400": "#FE6032",
       },
       keyframes: {
         "slide-right": {

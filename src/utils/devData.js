@@ -1,4 +1,11 @@
-export const products = [];
+export const products = [
+  {
+    name: 'Tên sản phẩm',
+    price: 1000000,
+    
+  },
+
+];
 export const user = [];
 
 export const bill = [];

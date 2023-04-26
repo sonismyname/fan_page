@@ -8,6 +8,7 @@ import {
   AiOutlineShoppingCart,
 } from "react-icons/ai";
 import { IoMdAdd } from "react-icons/io";
+import { toast } from "react-toastify";
 
 const Detail = () => {
   const navigate = useNavigate();
@@ -16,11 +17,21 @@ const Detail = () => {
   const handleHide = () => {
     setIsShow((pre) => !pre);
   };
-	const hanldeAddToCart = () => {
-		
-	}
+  const hanldeAddToCart = () => {
+    const form = document.getElementById("detail-form");
+    form?.classList?.remove("animate-slide-right");
+    form?.classList?.add("animate-slide-left");
+    const setTimeOutId = setTimeout(() => {
+      navigate("/");
+      toast.success("Thêm vào giỏ hàng thành công!!");
+      clearTimeout(setTimeOutId);
+    }, 500);
+  };
+  const handleSubmit = (e) => {
+    // dispatch(actions.buyProducts({ id: id, name: "bánh quy", price: 1000 }));
+  };
   return (
-    <div className="flex h-screen w-auto">
+    <div className="flex h-screen w-auto z-20">
       <div
         onClick={() => {
           navigate(path.PUBLIC);
@@ -28,7 +39,7 @@ const Detail = () => {
         className="fixed w-screen h-screen bottom-0 top-0 right-0 z-100 bg-[rgba(0,0,0,0.5)] justify-center"
       ></div>
       <div
-        id="form"
+        id="detail-form"
         className="fixed flex flex-col top-0 right-0 left-0 w-[60%] rounded-[20px] p-2 h-[600px] m-auto mt-[100px] bg-[#fff] animate-slide-right z-200"
       >
         <div className="flex">
@@ -45,7 +56,7 @@ const Detail = () => {
                     alt="img"
                     src="https://th.bing.com/th/id/OIP.FjLkalx51D8xJcpixUGJywHaE8?pid=ImgDet&rs=1"
                     key={index}
-                    className="w-[100px] h-auto"
+                    className="w-[100px] h-auto hover:shadow-lg cursor-pointer"
                   />
                 );
               })}
@@ -121,7 +132,10 @@ const Detail = () => {
                 />
               </div>
             </div>
-            <div onClick={hanldeAddToCart} className="flex border border-red-400 hover:bg-red-400 w-[50%] p-2 gap-2 text-red-400 hover:text-[#fff] text-center justify-center rounded-lg cursor-pointer">
+            <div
+              onClick={hanldeAddToCart}
+              className="flex border border-red-400 hover:bg-red-400 w-[50%] p-2 gap-2 text-red-400 hover:text-[#fff] text-center justify-center rounded-lg cursor-pointer"
+            >
               <AiOutlineShoppingCart size={24} />
               <span className="select-none">Thêm vào giỏ hàng</span>
             </div>
