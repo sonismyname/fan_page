@@ -5,28 +5,20 @@ export const buyProducts = (bill) => ({
   bill: bill,
 });
 
-// export const fetchAddress = async(dispatch) => {
-//   try {
-//     // console.log("dispatch", dispatch)
-//     const response = await apis.getAddress();
-//     console.log(response)
-//     if (response?.data.code === 200) {
-//       // console.log('catch')
-//       dispatch({
-//         type: actionTypes.GET_NEW_RELEASE,
-//         newReleaseData: response?.data?.data,
-//         // send objiect action
-//       });
-//     } else {
-//       dispatch({
-//         type: actionTypes.GET_NEW_RELEASE,
-//         newReleaseData: null,
-//       });
-//     }
-//   } catch (error) {
-//     dispatch({
-//       type: actionTypes.GET_NEW_RELEASE,
-//       newReleaseData: null,
-//     });
-//   }
-// }
+export const addProducts = (products) => ({
+  type: actionTypes.ADD_PRODUCT,
+  products: products,
+});
+
+export const addStore = (stores) => ({
+  type: actionTypes.ADD_STORE,
+  stores: stores,
+});
+export const addUser = (users) => ({
+  type: actionTypes.ADD_USER,
+  users: users,
+});
+export const addDetailBills = (detail_bills) => ({
+  type: actionTypes.ADD_DETAILBILL,
+  detail_bills: detail_bills,
+});

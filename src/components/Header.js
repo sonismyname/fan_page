@@ -7,18 +7,18 @@ const Header = () => {
   const navigate = useNavigate();
   const { IoReorderThreeSharp, AiOutlineShoppingCart } = icons;
   return (
-    <div className="flex fixed top-0 right-0 left-0 gap-1 p-4 pl-4 w-screen justify-center items-center z-10">
-      <div onClick={(e) => navigate("/")} className="w-[80%] md:w-[30%] h-[60px] border border-red-300">
-        LOGO
+    <div className="flex fixed top-0 right-0 left-0 gap-1 p-4 pl-4 w-screen justify-center items-center z-50 bg-main-500">
+      <div onClick={(e) => navigate("/")} className="w-[80%] md:w-[30%] h-[80px]">
+        <img src={`${process.env.PUBLIC_URL}/logo.png`} className="h-full w-auto object-contain m-auto cursor-pointer" alt="logo"></img>
       </div>
-      <div className="w-[60%] h-[60px] border border-blue-300 hidden md:flex pr-10">
+      <div className="w-[60%] h-[60px] hidden md:flex pr-10">
         <div className="flex justify-center gap-5 items-center w-full">
           <input
             type="text"
-            className="focus:outline-none border border-red-500 rounded-[20px] p-2 w-[70%]"
+            className="focus:outline-none rounded-[20px] p-2 w-[70%]"
             placeholder="Tên sản phẩm tìm kiếm....."
           ></input>
-          <button className="border border-[#753939] p-2 rounded-[20px] hover:bg-main-400">
+          <button className="border border-[#753939] p-2 rounded-[20px] hover:bg-main-100">
             Tìm kiếm
           </button>
           <span
@@ -52,6 +52,14 @@ const Header = () => {
                 className="hover:bg-[#fff] hover:text-[#4fa7e1] p-1 rounded-lg"
               >
                 ADMIN
+              </span>
+              <span
+                onClick={(e) => {
+                  navigate("");
+                }}
+                className="hover:bg-[#fff] hover:text-[#4fa7e1] p-1 rounded-lg"
+              >
+                CLIENT
               </span>
             </div>
           </span>

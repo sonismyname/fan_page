@@ -5,3 +5,7 @@ export { default as Deliver } from './Deliver'
 export { default as DetailDeliver } from './DetailDeliver'
 export { default as Login } from './Login'
 export { default as Dashboard } from './Dashboard'
+export { default as Order } from './Order'
+export { default as Store } from './Store'
+export { default as DetailDash } from './DetailDash'
+

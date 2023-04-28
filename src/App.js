@@ -5,15 +5,32 @@ import Public from "./containers/public/Public";
 import Cart from "./components/Cart";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useDispatch } from "react-redux";
-import * as actions from "./store/actions"
+import { useDispatch, useSelector } from "react-redux";
+import * as actions from "./store/actions";
 import Detail from "./components/Detail";
 import FillInfo from "./containers/public/FillInfo";
-import { Dashboard, Deliver, DetailDeliver, Login } from "./containers/public";
-
+import {
+  Dashboard,
+  Deliver,
+  DetailDash,
+  DetailDeliver,
+  Login,
+  Order,
+  Store,
+} from "./containers/public";
+import { users_dev, products_dev, stores_dev } from "./utils/devData";
+import { useEffect } from "react";
 
 function App() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const { users } = useSelector((state) => state.app);
+  useEffect(() => {
+    if (users.length === 0) {
+      dispatch(actions.addUser(users_dev));
+      dispatch(actions.addProducts(products_dev));
+      dispatch(actions.addStore(stores_dev));
+    }
+  }, []);
   return (
     <>
       <div className="">
@@ -25,11 +42,21 @@ function App() {
               <Route path={path.DETAIL} element={<Detail />}></Route>
               {/* <Route path={path.HOME} element={<Home />} /> */}
             </Route>
-            <Route path={path.FILLINFOR} element={<FillInfo/>}></Route>
-            <Route path={path.DELIVER} element={<Deliver/>}></Route>
-            <Route path={path.DETAIL_DELIVER} element={<DetailDeliver/>}></Route>
-            <Route path={path.ADMIN} element={<Login/>}></Route>
-            <Route path={path.DASHBOARD} element={<Dashboard/>}></Route>
+            <Route path={path.FILLINFOR} element={<FillInfo />}></Route>
+            <Route path={path.DELIVER} element={<Deliver />}></Route>
+            <Route
+              path={path.DETAIL_DELIVER}
+              element={<DetailDeliver />}
+            ></Route>
+            <Route path={path.ADMIN} element={<Login />}></Route>
+            <Route path={path.DASHBOARD} element={<Dashboard />}>
+              <Route path={path.STORE} element={<Store />}></Route>
+              <Route path={path.ORDER} element={<Order />}></Route>
+              <Route
+                path={path.DETAIL_DELIVER_DASHBOARD}
+                element={<DetailDash />}
+              ></Route>
+            </Route>
           </Route>
         </Routes>
       </div>

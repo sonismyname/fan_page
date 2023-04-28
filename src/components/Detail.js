@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import path from "../utils/path";
 import {
   AiFillStar,
@@ -9,14 +9,18 @@ import {
 } from "react-icons/ai";
 import { IoMdAdd } from "react-icons/io";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 const Detail = () => {
   const navigate = useNavigate();
   const [isShow, setIsShow] = useState(false);
   const [quatity, setQuatity] = useState(0);
+  const {products} = useSelector(state => state.app);
+  const {id} = useParams();
   const handleHide = () => {
     setIsShow((pre) => !pre);
   };
+  const [currentImg, setCurrentImg] = useState(products[id-1].img[0])
   const hanldeAddToCart = () => {
     const form = document.getElementById("detail-form");
     form?.classList?.remove("animate-slide-right");
@@ -40,22 +44,23 @@ const Detail = () => {
       ></div>
       <div
         id="detail-form"
-        className="fixed flex flex-col top-0 right-0 left-0 w-[60%] rounded-[20px] p-2 h-[600px] m-auto mt-[100px] bg-[#fff] animate-slide-right z-200"
+        className="fixed flex flex-col top-0 right-0 left-0 w-[60%] rounded-[20px] p-2 h-[600px] m-auto mt-[120px] bg-[#fff] animate-slide-right z-200"
       >
         <div className="flex">
           <div className="flex flex-col w-[50%] text-center gap-10">
             <img
-              src="https://th.bing.com/th/id/OIP.FjLkalx51D8xJcpixUGJywHaE8?pid=ImgDet&rs=1"
+              src={`${process.env.PUBLIC_URL}/${currentImg}`}
               alt="ảnh sản phẩm"
-              className="h-auto"
+              className="h-[400px]"
             />
             <div className="flex gap-2 justify-center relative">
-              {[1, 2, 3, 4].map((element, index) => {
+              {products[id-1].img.map((element, index) => {
                 return (
                   <img
                     alt="img"
-                    src="https://th.bing.com/th/id/OIP.FjLkalx51D8xJcpixUGJywHaE8?pid=ImgDet&rs=1"
+                    src={`${process.env.PUBLIC_URL}/${element}`}
                     key={index}
+                    onClick={e => setCurrentImg(element)}
                     className="w-[100px] h-auto hover:shadow-lg cursor-pointer"
                   />
                 );
@@ -65,7 +70,7 @@ const Detail = () => {
           </div>
           <div className="w-[50%] text-center flex flex-col gap-5 items-center">
             <h1 className="text-[30px] font-semibold uppercase">
-              Tên sản phẩm
+              {products[id-1].name}
             </h1>
             <div className="flex gap-4 justify-around">
               <div className="flex gap-1 items-center mx-4">
@@ -86,15 +91,14 @@ const Detail = () => {
             </div>
             {isShow ? (
               <span onClick={handleHide} className="cursor-pointer">
-                Mô tả đầy đủ ở đây Mô tả đầy đủ ở đây Mô tả đầy đủ ở đây Mô tả
-                đầy đủ ở đây Mô tả đầy đủ ở đây
+                {products[id-1].des}
               </span>
             ) : (
               <span onClick={handleHide} className="cursor-pointer">
-                Mô tả....Chi tiết
+                {products[id-1].des.slice(0, 60)}...Chi tiết
               </span>
             )}
-            <span>Số lượng: 100</span>
+            <span>Số lượng: {products[id-1].quatity}</span>
             <div className="flex justify-center gap-1 items-center">
               <span className="pr-4 text-[20px]">Số lượng mua:</span>
               <div
@@ -114,12 +118,12 @@ const Detail = () => {
               <input
                 className="border border-black w-[80px] h-10 px-2 focus:outline-none rounded-lg text-right readonly disabled"
                 value={quatity}
-                // onChange={}
+                onChange={(e) => {}}
               />
               <div
                 onClick={(e) => {
                   // không đc vượt quá số lượng trong kho
-                  if (quatity >= 100) {
+                  if (quatity >= products[id -1].quatity) {
                   } else {
                     setQuatity((pre) => pre + 1);
                   }

@@ -8,6 +8,8 @@ module.exports = {
         "main-200": "#CED9D9",
         "main-300": "#C0D8D8",
         "main-400": "#FE6032",
+        "main-500": "#1B9AF9",
+        "main-600": "#5bb6f7"
       },
       keyframes: {
         "slide-right": {

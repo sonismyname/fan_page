@@ -8,7 +8,7 @@ const Deliver = () => {
   const { AiFillQuestionCircle } = icons;
   const navigate = useNavigate()
   return (
-    <div className="pt-[90px] px-5 py-10 m-auto w-[80%] bg-main-100 flex flex-col gap-2 text-[#622323] text-[18px]">
+    <div className="pt-[120px] px-5 py-10 m-auto w-[80%] bg-main-100 flex flex-col gap-2 text-[#622323] text-[18px]">
       <BackArrow />
       {/* Mỗi fiv 1 đơn hàng */}
       {[1, 2, 3].map((e, i) => {

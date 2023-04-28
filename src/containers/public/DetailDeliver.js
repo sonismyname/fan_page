@@ -16,7 +16,7 @@ const DetailDeliver = () => {
     AiOutlineCheckCircle,
   } = icons;
   return (
-    <div className="pt-[90px] px-5 py-10 m-auto w-[80%] flex flex-col gap-8 text-[#622323] text-[18px] bg-main-100">
+    <div className="pt-[120px] px-5 py-10 m-auto w-[80%] flex flex-col gap-8 text-[#622323] text-[18px] bg-main-100">
       <BackArrow></BackArrow>
       <div className="flex justify-end gap-5 p-4 border-b border-[#622323]">
         <h1>Mã đơn hàng: {id}</h1>
@@ -36,12 +36,12 @@ const DetailDeliver = () => {
         </div>
         <div className="border-4 rounded-full border-green-500 w-[80px] h-[80px] flex justify-center items-center text-green-500 bg-[#fff] z-10">
           <span>
-            <TbTruckDelivery size={50} />
+            <AiOutlineDeliveredProcedure size={50} />
           </span>
         </div>
         <div className="border-4 rounded-full border-green-500 w-[80px] h-[80px] flex justify-center items-center text-green-500 bg-[#fff] z-10">
           <span>
-            <AiOutlineDeliveredProcedure size={50} />
+            <TbTruckDelivery size={50} />
           </span>
         </div>
         <div className="border-4 rounded-full border-gray-500 w-[80px] h-[80px] flex justify-center items-center z-10 bg-[#fff]">

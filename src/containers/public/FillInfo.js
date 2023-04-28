@@ -38,7 +38,7 @@ const FillInfo = () => {
     toast.success('Đặt hàng thành công!!')
   }
   return (
-    <div className="pt-[80px] px-5 py-10 m-auto w-[80%] flex flex-col bg-main-100 gap-5 text-[#622323] text-[18px]">
+    <div className="pt-[120px] px-5 py-10 m-auto w-[80%] flex flex-col bg-main-100 gap-5 text-[#622323] text-[18px]">
       <BackArrow></BackArrow>
       <div className="flex flex-col h-[500px] w-[60%] border border-red-500 bg-[#e48245] rounded-lg mx-auto p-4 gap-5 text-center sh">
         <h1>Thông tin người nhận đơn hàng</h1>

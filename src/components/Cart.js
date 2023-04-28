@@ -32,7 +32,7 @@ const Cart = () => {
       ></div>
       <div
         id="form"
-        className="fixed flex flex-col top-0 right-0 left-0 w-[60%] h-[600px]  m-auto mt-[100px] rounded-[20px] bg-[#fff] animate-slide-right z-200"
+        className="fixed flex flex-col top-0 right-0 left-0 w-[60%] h-[600px]  m-auto mt-[120px] rounded-[20px] bg-[#fff] animate-slide-right z-200"
       >
         <div className="flex flex-col gap-4 p-5 h-[500px]">
           <div className="flex w-full text-center">

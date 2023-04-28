@@ -10,8 +10,8 @@ const commonConfig = {
 }
 const appConfig = {
     ...commonConfig,
-    key: 'hoadon',
-    whitelist: ['bills']
+    key: 'data_base_fake',
+    whitelist: ['bills', 'products', 'users', 'stores', 'detail_bills']
 }
 const rootReducer = combineReducers({
     app: persistReducer(appConfig, appReducer),

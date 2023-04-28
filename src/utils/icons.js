@@ -1,4 +1,4 @@
-import { BsFillArrowUpSquareFill } from "react-icons/bs";
+import { BsFillArrowUpSquareFill, BsBoxes, BsFillBox2Fill } from "react-icons/bs";
 import { IoReorderThreeSharp, IoLocationOutline } from "react-icons/io5";
 import {
   AiOutlineSearch,
@@ -8,11 +8,18 @@ import {
   AiOutlineArrowRight,
   AiFillStar,
   AiFillQuestionCircle,
-  AiOutlineCheckCircle
+  AiOutlineCheckCircle,
+  AiOutlineAppstoreAdd,
+  AiFillEdit,
+  AiFillDelete,
+  AiFillFilter
 } from "react-icons/ai";
-import { MdRequestPage } from "react-icons/md";
+import { MdRequestPage, MdOutlineWarehouse } from "react-icons/md";
 import { SiCashapp } from "react-icons/si";
-import { TbTruckDelivery } from "react-icons/tb";
+import { TbTruckDelivery, TbTruckReturn } from "react-icons/tb";
+import {BiCommentDetail, BiPackage} from "react-icons/bi";
+import {GiConfirmed} from "react-icons/gi";
+import {VscChromeClose, VscCheck} from "react-icons/vsc";
 const icons = {
   BsFillArrowUpSquareFill,
   IoReorderThreeSharp,
@@ -28,6 +35,19 @@ const icons = {
   AiOutlineDeliveredProcedure,
   IoLocationOutline,
   AiOutlineCheckCircle,
+  MdOutlineWarehouse,
+  BsBoxes,
+  BsFillBox2Fill,
+  AiOutlineAppstoreAdd,
+  AiFillEdit,
+  AiFillDelete,
+  AiFillFilter,
+  BiCommentDetail,
+  BiPackage,
+  GiConfirmed,
+  VscChromeClose,
+  VscCheck,
+  TbTruckReturn
 };
 
 export default icons;
