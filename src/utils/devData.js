@@ -6,6 +6,7 @@ export const products_dev = [
     img: ["sp1.png", "sp1_2.png", "sp1_3.png", "sp1_4.png"],
     price: 250,
     quatity: 10,
+    selled: 0,
   },
   {
     id: 2,
@@ -14,6 +15,7 @@ export const products_dev = [
     img: ["sp2.png", "sp2_2.png", "sp2_3.png"],
     price: 250,
     quatity: 10,
+    selled: 0,
   },
 ];
 export const stores_dev = [
@@ -41,8 +43,41 @@ export const users_dev = [
     usename: "USER1",
     password: "123456",
     role: "USER",
+    phone: "0782452xxx",
+    name: "Nguyễn Văn A"
   },
 ];
+
+export const materials_dev = [
+  {
+    id: 1,
+    name: "Sợi len",
+    price: 10,
+    quatity: 100,
+    unit: "m"
+  }, 
+  {
+    id: 2,
+    name: "Kim",
+    price: 10,
+    quatity: 100,
+    unit: "cái"
+  },
+  {
+    id: 3,
+    name: "Khung nhựa",
+    price: 10,
+    quatity: 100,
+    unit: "khung"
+  },
+  {
+    id: 4,
+    name: "Dung cụ",
+    price: 10,
+    quatity: 100,
+    unit: "cái"
+  },
+]
 
 export const bill = [];
 export const detailBill = [];

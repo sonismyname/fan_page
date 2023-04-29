@@ -6,20 +6,30 @@ import { useSelector, useDispatch } from "react-redux";
 import * as actions from "../store/actions";
 
 const Cart = () => {
-  const { bills, id } = useSelector((state) => state.app);
+  const { carts } = useSelector((state) => state.app);
+  console.log(carts);
+  let total = 0;
+  carts.length > 0 && carts.forEach((element) => {
+    const price = element?.price * element?.quatity * 1000;
+    total += price;
+  });
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
-    // dispatch(actions.buyProducts({ id: id, name: "bánh quy", price: 1000 }));
-    const form = document.getElementById("form");
-    console.log(form);
-    form?.classList?.remove("animate-slide-right");
-    form?.classList?.add("animate-slide-left");
-    const idTimOut = setTimeout(() => {
-      navigate(path.FILLINFOR);
-      toast.info("Điền thông tin đơn hàng!!");
-      clearTimeout(idTimOut)
-    }, 400);
+    if (carts.length !== 0) {
+      const form = document.getElementById("form");
+      console.log(form);
+      form?.classList?.remove("animate-slide-right");
+      form?.classList?.add("animate-slide-left");
+      const idTimOut = setTimeout(() => {
+        navigate(path.FILLINFOR);
+        toast.info("Điền thông tin đơn hàng!!");
+        clearTimeout(idTimOut);
+      }, 400);
+    }
+    else{
+      toast.warning("Chưa có gì trong giỏ hàng!")
+    }
   };
   const handleDelete = () => {};
   return (
@@ -42,29 +52,30 @@ const Cart = () => {
             <div className="w-[30%]">Thành tiền</div>
           </div>
           {/* Mỗi sản phẩm là 1 dòng */}
-          {[1, 2, 3].map((el, index) => {
+          {carts?.map((el, index) => {
             return (
-              <div key={index} className="flex w-full text-center">
+              <div
+                key={index}
+                className="flex w-full text-center items-center border bg-main-200 hover:shadow-md cursor-pointer rounded-lg"
+              >
                 {/* ảnh + tên */}
-                <div className="flex w-[30%] gap-2">
-                  <img
-                    src="https://th.bing.com/th/id/OIP.FjLkalx51D8xJcpixUGJywHaE8?pid=ImgDet&rs=1"
-                    alt="ảnh"
-                    className="w-[40%] h-auto"
-                  />
-                  <h1 className="text-[16px] w-[40%]">Tên sản phẩm ha</h1>
+                <div className="flex w-[30%] gap-2 items-center">
+                  <img src={el?.img[0]} alt="ảnh" className="w-[40%] h-auto" />
+                  <h1 className="text-[16px] w-[40%]">{el?.name}</h1>
                 </div>
                 {/* đơn giá */}
                 <div className="w-[20%] text-center">
-                  <span>1 000 000</span>
+                  <span>{el?.price} 000</span>
                 </div>
                 {/* số lượng */}
                 <div className="w-[20%] text-center">
-                  <span>10</span>
+                  <span>{el?.quatity}</span>
                 </div>
                 {/* thành tiền */}
                 <div className="w-[30%] text-center">
-                  <span>10 000 000</span>
+                  <span>
+                    {(el?.quatity * el?.price * 1000).toLocaleString("vi-VN")} vnđ
+                  </span>
                 </div>
               </div>
             );
@@ -72,7 +83,9 @@ const Cart = () => {
         </div>
         <div className="flex gap-4 items-center justify-end">
           <span className="text-[20px]">Thành tiền: </span>
-          <span className="text-[20px]">30 000 000 vnđ</span>
+          <span className="text-[20px]">
+            {carts?.length !== 0? (total + 15000).toLocaleString("vi-VN"): (total).toLocaleString("vi-VN")} vnđ (bao gồm chi phí vận chuyển)
+          </span>
           <button
             onClick={handleSubmit}
             className="border border-red-500 text-red-500 hover:bg-red-500 hover:text-[#fff] px-5 py-2 mr-10 rounded-[10px]"

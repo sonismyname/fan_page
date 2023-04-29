@@ -2,7 +2,7 @@ import React from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import path from "../../utils/path";
 import { useSelector } from "react-redux";
-import { Carousel, Chatbox, ProductLeft, ProductRight } from "../../components";
+import { Carousel, Chatbox, ProductLeft, ProductRight, Testchat } from "../../components";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -25,9 +25,6 @@ const Home = () => {
       </div>
       <ProductLeft product={products[0]}/>
       <ProductRight product={products[1]}/>
-      <button onClick={showForm} className="border border-red-500 p-5">
-        Form
-      </button>
       <Outlet></Outlet>
     </div>
   );

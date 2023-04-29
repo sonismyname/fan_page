@@ -12,10 +12,10 @@ const ProductRight = ({product}) => {
   return (
     <div className="flex gap-5 p-5 justify-center">
       <div className="flex flex-col gap-5 text-center w-[60%]">
-        <h1 className="text-[30px] font-semibold uppercase">{product.name}</h1>
-        <span>{product.des}</span>
+        <h1 className="text-[30px] font-semibold uppercase">{product?.name}</h1>
+        <span>{product?.des}</span>
         <div className="flex text-[25px] font-extrabold gap-5 items-center justify-start animate-pulse">
-          <h1 className="text-red-500">Giá: {product.price} 000 vnđ</h1>
+          <h1 className="text-red-500">Giá: {product?.price} 000 vnđ</h1>
           <div onClick={handleDetail} className="border border-red-500 rounded-lg px-2 text-red-400 hover:text-red-500 flex items-center gap-3 cursor-pointer">
             Xem chi tiết
             <span>

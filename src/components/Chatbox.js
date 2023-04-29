@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { BsMessenger } from "react-icons/bs";
 import { VscChromeClose, VscCheck } from "react-icons/vsc";
 import Scrollbars from "react-custom-scrollbars-2";
+import { StreamChat } from "stream-chat";
+import { useEffect } from "react";
 
 const Chatbox = () => {
   const [isShow, setIsShow] = useState(false);
+
   return (
     <div className="fixed bottom-10 right-10 rounded-full cursor-pointer hover:shadow-lg items-center justify-center z-50">
       <span>
@@ -67,7 +70,10 @@ const Chatbox = () => {
                   type="text"
                   className="focus:outline-none border m-2 px-2 py-1 rounded-lg w-[80%]"
                 ></input>
-                <button className="bg-main-500 hover:shadow-md hover:text-[#fff] rounded-md px-2 h-8 my-auto">
+                <button
+                  // onClick={(e) => handleSubmit(e)}
+                  className="bg-main-500 hover:shadow-md hover:text-[#fff] rounded-md px-2 h-8 my-auto"
+                >
                   Gửi
                 </button>
               </div>

@@ -6,6 +6,10 @@ const actionTypes = {
     ADD_STORE: "ADD_STORE",
     ADD_USER: "ADD_USER",
     ADD_DETAILBILL: "ADD_DETAILBILL",
+    ADD_CART: "ADD_CART",
+    ADD_MATERIAL: "ADD_MATERIAL",
+    REMOVE_CART: "REMOVE_CART",
+    CHANGE_STATUS: "CHANGE_STATUS",
 }
 
 export default actionTypes

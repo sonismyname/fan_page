@@ -11,7 +11,7 @@ const commonConfig = {
 const appConfig = {
     ...commonConfig,
     key: 'data_base_fake',
-    whitelist: ['bills', 'products', 'users', 'stores', 'detail_bills']
+    whitelist: ['bills', 'products', 'users', 'stores', 'detail_bills', 'materials']
 }
 const rootReducer = combineReducers({
     app: persistReducer(appConfig, appReducer),

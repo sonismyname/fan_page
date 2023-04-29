@@ -12,6 +12,7 @@ const path = {
     ORDER: "/dashboard/order",
     STORE: "/dashboard/store/:slug",
     DETAIL_DELIVER_DASHBOARD: "/dashboard/detail/:id",
-    CONFIRM_STATE: "/dashboard/detail/:id/confirm"
+    CONFIRM_STATE: "/dashboard/detail/:id/confirm",
+    APP_CHAT: "/chat"
 }
 export default path

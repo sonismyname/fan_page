@@ -22,3 +22,19 @@ export const addDetailBills = (detail_bills) => ({
   type: actionTypes.ADD_DETAILBILL,
   detail_bills: detail_bills,
 });
+
+export const addCart = (product) => ({
+  type: actionTypes.ADD_CART,
+  cart: product,
+});
+export const removeCart = () => ({
+  type: actionTypes.REMOVE_CART
+});
+export const addMaterial = (materials) => ({
+  type: actionTypes.ADD_MATERIAL,
+  materials: materials,
+});
+export const changeStatus = (id, status) => ({
+  type: actionTypes.CHANGE_STATUS,
+  payload: {id, status: status}
+});

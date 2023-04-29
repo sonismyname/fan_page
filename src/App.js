@@ -18,8 +18,9 @@ import {
   Order,
   Store,
 } from "./containers/public";
-import { users_dev, products_dev, stores_dev } from "./utils/devData";
+import { users_dev, products_dev, stores_dev, materials_dev } from "./utils/devData";
 import { useEffect } from "react";
+import { Testchat } from "./components";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ function App() {
       dispatch(actions.addUser(users_dev));
       dispatch(actions.addProducts(products_dev));
       dispatch(actions.addStore(stores_dev));
+      dispatch(actions.addMaterial(materials_dev))
     }
   }, []);
   return (
@@ -58,6 +60,7 @@ function App() {
               ></Route>
             </Route>
           </Route>
+          <Route path={path.APP_CHAT} element={<Testchat></Testchat>}></Route>
         </Routes>
       </div>
       <ToastContainer

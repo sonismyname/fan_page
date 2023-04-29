@@ -9,27 +9,58 @@ import {
 } from "react-icons/ai";
 import { IoMdAdd } from "react-icons/io";
 import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import * as actions from "../store/actions"
 
 const Detail = () => {
   const navigate = useNavigate();
   const [isShow, setIsShow] = useState(false);
   const [quatity, setQuatity] = useState(0);
-  const {products} = useSelector(state => state.app);
-  const {id} = useParams();
+  const { products, carts } = useSelector((state) => state.app);
+  const { id } = useParams();
   const handleHide = () => {
     setIsShow((pre) => !pre);
   };
-  const [currentImg, setCurrentImg] = useState(products[id-1].img[0])
+  const [currentImg, setCurrentImg] = useState(products[id - 1].img[0]);
+  const dispatch = useDispatch();
   const hanldeAddToCart = () => {
-    const form = document.getElementById("detail-form");
-    form?.classList?.remove("animate-slide-right");
-    form?.classList?.add("animate-slide-left");
-    const setTimeOutId = setTimeout(() => {
-      navigate("/");
-      toast.success("Thêm vào giỏ hàng thành công!!");
-      clearTimeout(setTimeOutId);
-    }, 500);
+    if (quatity !== 0) {
+      const form = document.getElementById("detail-form");
+      form?.classList?.remove("animate-slide-right");
+      form?.classList?.add("animate-slide-left");
+      const setTimeOutId = setTimeout(() => {
+        navigate("/");
+        // toast.success(quatity);
+        // add bill
+        const now = new Date();
+        const options = {
+          hour: "2-digit",
+          minute: "2-digit",
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+        };
+        const formattedDate = new Intl.DateTimeFormat("vi", options).format(
+          now
+        );
+        const cart = {
+          id: carts.length + 1,
+          id_product: products[id - 1].id,
+          name: products[id - 1].name,
+          des: products[id - 1].des,
+          img: [...products[id - 1].img],
+          price: products[id - 1].price,
+          quatity: quatity,
+          date: formattedDate,
+        };
+        dispatch(actions.addCart(cart))
+        
+        toast.success("Thêm vào giỏ hàng thành công!!");
+        clearTimeout(setTimeOutId);
+      }, 500);
+    } else {
+      toast.warning("Hãy chọn số lương hàng muốn mua");
+    }
   };
   const handleSubmit = (e) => {
     // dispatch(actions.buyProducts({ id: id, name: "bánh quy", price: 1000 }));
@@ -54,14 +85,14 @@ const Detail = () => {
               className="h-[400px]"
             />
             <div className="flex gap-2 justify-center relative">
-              {products[id-1].img.map((element, index) => {
+              {products[id - 1].img.map((element, index) => {
                 return (
                   <img
                     alt="img"
                     src={`${process.env.PUBLIC_URL}/${element}`}
                     key={index}
-                    onClick={e => setCurrentImg(element)}
-                    className="w-[100px] h-auto hover:shadow-lg cursor-pointer"
+                    onClick={(e) => setCurrentImg(element)}
+                    className="w-[100px] h-auto hover:shadow-lg transform transition-all hover:scale-110 cursor-pointer"
                   />
                 );
               })}
@@ -70,7 +101,7 @@ const Detail = () => {
           </div>
           <div className="w-[50%] text-center flex flex-col gap-5 items-center">
             <h1 className="text-[30px] font-semibold uppercase">
-              {products[id-1].name}
+              {products[id - 1].name}
             </h1>
             <div className="flex gap-4 justify-around">
               <div className="flex gap-1 items-center mx-4">
@@ -86,19 +117,19 @@ const Detail = () => {
               </div>
               <div className="flex gap-1 items-center mx-4">
                 <span>Đã bán: </span>
-                <span>6</span>
+                <span>{products[id - 1].selled}</span>
               </div>
             </div>
             {isShow ? (
               <span onClick={handleHide} className="cursor-pointer">
-                {products[id-1].des}
+                {products[id - 1].des}
               </span>
             ) : (
               <span onClick={handleHide} className="cursor-pointer">
-                {products[id-1].des.slice(0, 60)}...Chi tiết
+                {products[id - 1].des.slice(0, 60)}...Chi tiết
               </span>
             )}
-            <span>Số lượng: {products[id-1].quatity}</span>
+            <span>Số lượng: {products[id - 1].quatity}</span>
             <div className="flex justify-center gap-1 items-center">
               <span className="pr-4 text-[20px]">Số lượng mua:</span>
               <div
@@ -123,7 +154,7 @@ const Detail = () => {
               <div
                 onClick={(e) => {
                   // không đc vượt quá số lượng trong kho
-                  if (quatity >= products[id -1].quatity) {
+                  if (quatity >= products[id - 1].quatity) {
                   } else {
                     setQuatity((pre) => pre + 1);
                   }

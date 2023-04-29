@@ -8,7 +8,7 @@ const Store = () => {
   const { AiOutlineAppstoreAdd, AiFillEdit, AiFillDelete } = icons;
   const { slug } = useParams();
   const [isStore, setIsStore] = useState(true);
-  const { products} = useSelector(state => state.app);
+  const { products, materials} = useSelector(state => state.app);
   console.log(products);
   return (
     <div className="flex flex-col gap-4">
@@ -57,20 +57,20 @@ const Store = () => {
           <div className="flex flex-col">
             {/* list đơn hàng */}
             <Scrollbars style={{ width: "100%", height: 480 }}>
-              {[1, 2, 3, 4, 5, 6, 6, 7, 8, 8, 9, 8, 4].map((el, index) => {
+              {products?.map((el, index) => {
                 return (
                   <div
                     key={index}
                     className="flex cursor-pointer text-center mt-2 hover:bg-main-300 border border-gray-300 hover:shadow-lg rounded-md items-center text-[#622323] group"
                   >
                     <img
-                      src="https://th.bing.com/th/id/OIP.FjLkalx51D8xJcpixUGJywHaE8?pid=ImgDet&rs=1"
+                      src={`${process.env.PUBLIC_URL}/${el?.img[0]}`}
                       alt="ảnh sản phẩm"
-                      className="w-[10%] h-15 object-contain"
+                      className="w-[10%] h-auto object-contain"
                     ></img>
-                    <span className="w-[30%]">Tên sản phẩm</span>
-                    <span className="w-[30%]">Giá: 1000 vnđ</span>
-                    <span className="w-[25%]">10</span>
+                    <span className="w-[30%]">{el?.name}</span>
+                    <span className="w-[30%]">Giá: {el?.price} 000 vnđ</span>
+                    <span className="w-[25%]">{el?.quatity}</span>
                     <div className="hidden w-[5%] gap-2 pr-2 group-hover:flex">
                       <AiFillEdit size={30} />
                       <AiFillDelete size={30} />
@@ -93,25 +93,29 @@ const Store = () => {
             <span className="text-center w-[30%] border-r-2 border-gray-400">
               Đơn giá
             </span>
-            <span className="text-center w-[25%] border-r-2 border-gray-400">
+            <span className="text-center w-[15%] border-r-2 border-gray-400">
               Số lượng
+            </span>
+            <span className="text-center w-[10%] border-r-2 border-gray-400">
+              Đơn vị
             </span>
             <span className="text-center w-[10%] border-r-2 border-gray-400">
               Chỉnh sửa
             </span>
           </div>
-          {[1, 2, 3, 4].map((el, index) => (
+          {materials?.map((el, index) => (
             <div
               key={index}
               className="flex cursor-pointer h-10 text-center mt-2 hover:bg-main-300 border border-gray-300 hover:shadow-lg rounded-md items-center text-[#622323] group"
             >
-              <h1 className="w-[5%]">{index + 1}</h1>
-              <span className="w-[30%]">Tên nguyên liệu</span>
-              <span className="w-[30%]">Giá: 1000 vnđ</span>
-              <span className="w-[25%]">10</span>
+              <h1 className="w-[5%]">{el.id}</h1>
+              <span className="w-[30%]">{el.name}</span>
+              <span className="w-[30%]">Giá: {el.price} 000 vnđ</span>
+              <span className="w-[15%]">{el.quatity}</span>
+              <span className="w-[10%]">{el.unit}</span>
               <div className="hidden w-[10%] gap-2 pr-2 group-hover:flex">
-                <AiFillEdit size={30} />
-                <AiFillDelete size={30} />
+                <AiFillEdit size={24} />
+                <AiFillDelete size={24} />
               </div>
             </div>
           ))}

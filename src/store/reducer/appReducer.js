@@ -1,11 +1,12 @@
 import actionTypes from "../actions/actionTypes";
 const initState = {
-  id: 1,
   bills: [],
   products: [],
   stores: [],
   users: [],
-  detail_bills: []
+  detail_bills: [],
+  carts: [],
+  materials: [],
 };
 
 const appReducer = (state = initState, action) => {
@@ -14,7 +15,6 @@ const appReducer = (state = initState, action) => {
       return {
         ...state,
         bills: [...state.bills, action.bill] || null,
-        id: state.id + 1,
       };
     }
     case actionTypes.ADD_PRODUCT: {
@@ -41,7 +41,37 @@ const appReducer = (state = initState, action) => {
         detail_bills: [...state.detail_bills, ...action.detail_bills] || null,
       };
     }
-    
+    case actionTypes.ADD_CART: {
+      return {
+        ...state,
+        carts: [...state.carts, action.cart] || null,
+      };
+    }
+    case actionTypes.REMOVE_CART: {
+      return {
+        ...state,
+        carts: [] || null,
+      };
+    }
+    case actionTypes.ADD_MATERIAL: {
+      return {
+        ...state,
+        materials: [...state.materials, ...action.materials] || null,
+      };
+    }
+    case actionTypes.CHANGE_STATUS: {
+      const updateBills = state.bills.map((item) => {
+        if (item.id == action.payload.id) {
+          return { ...item, status: action.payload.status };
+        } else {
+          return item;
+        }
+      });
+      return {
+        ...state,
+        bills: updateBills || null,
+      };
+    }
     default:
       return state;
   }
