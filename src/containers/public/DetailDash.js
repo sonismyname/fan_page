@@ -40,29 +40,20 @@ const DetailDash = () => {
   const thumbRef = useRef();
   const { bills } = useSelector((state) => state.app);
   useEffect(() => {
-    const status = bills[id - 1].status;
-    for (let key in stateString) {
-      if (stateString[key] == status) {
-        setStateOrder(key);
-        for (let i = 1; i <= key; i++) {
-          setTimeOrder((pre) => [
-            ...pre,
-            {
-              time: formattedDate,
-              state: stateString[i],
-            },
-          ]);
-        }
-        if (key != 6) {
-          console.log("oke");
-          const flow = 100 - 25 * (key - 1);
-          thumbRef.current.style.cssText = `right: ${flow}%`;
-        } else {
-          console.log("hahaa");
-          thumbRef.current.style.cssText = `right: ${25}%`;
-        }
+    setTimeOrder(bills[id - 1].status);
+    const status_state = bills[id - 1].status.length;
+    setStateOrder(status_state);
+    if (status_state === 6) {
+      thumbRef.current.style.cssText = `right: ${0}%`;
+    } else {
+      if (status_state !== 5) {
+        const flow = 100 - 25 * (status_state - 1);
+        thumbRef.current.style.cssText = `right: ${flow}%`;
+      } else {
+        thumbRef.current.style.cssText = `right: ${25}%`;
       }
     }
+    console.log(status_state);
   }, []);
   const [timeOrder, setTimeOrder] = useState([]);
   const [confirm, setConfirm] = useState(false);
@@ -75,30 +66,34 @@ const DetailDash = () => {
     2: "Đóng gói đơn hàng",
     3: "Đã giao cho đơn vị vận chuyển",
     4: "Đang giao hàng",
-    5: "Trả hàng",
-    6: "Giao hàng thành công",
+    6: "Trả hàng",
+    5: "Giao hàng thành công",
   };
   const handleConfirm = () => {
     // setConfirm(true);
     setStateOrder((pre) => pre);
 
     setShowStateBox(false);
-    const flow = 100 - 25 * (stateOrder - 1);
-    thumbRef.current.style.cssText = `right: ${flow}%`;
+    if (stateOrder == 6) {
+      thumbRef.current.style.cssText = `right: ${0}%`;
+    } else {
+      const flow = 100 - 25 * (stateOrder - 1);
+      thumbRef.current.style.cssText = `right: ${flow}%`;
+    }
     // lấy ngày
 
     setTimeOrder((pre) => [
       ...pre,
       {
-        time: formattedDate,
-        state: stateString[stateOrder],
+        time_status: formattedDate,
+        status_name: stateString[stateOrder],
       },
     ]);
     // console.log(formattedDate)
     // lưu state UI
     // lưu state đơn hàng
     console.log("confirm");
-    dispatch(actions.changeStatus(id, stateString[stateOrder]));
+    dispatch(actions.changeStatus(id, stateString[stateOrder], formattedDate));
     // set CSS
   };
   const handleDeny = () => {
@@ -130,18 +125,17 @@ const DetailDash = () => {
     // setSelectedFile(true);
     if (selectedFile) {
       setImageBox(false);
-      setStateOrder(6);
+      setStateOrder(5);
       setTimeOrder((pre) => [
         ...pre,
         {
-          time: formattedDate,
-          state: stateString[6],
+          time_status: formattedDate,
+          status_name: stateString[5],
         },
       ]);
-      dispatch(actions.changeStatus(id, stateString[6]));
+      dispatch(actions.changeStatus(id, stateString[5], formattedDate));
     }
   };
-  console.log(stateOrder);
   return (
     <Scrollbars style={{ width: "100%", height: 600 }}>
       <div className="m-auto w-full flex flex-col gap-8 text-[#622323] text-[18px] bg-main-100 relative">
@@ -262,7 +256,7 @@ const DetailDash = () => {
           </div>
           <div
             className={`border-4 hover:shadow-lg cursor-pointer rounded-full ${
-              stateOrder == 5
+              stateOrder == 6
                 ? "border-green-500 text-green-500"
                 : "border-gray-500"
             }  w-[80px] h-[80px] flex justify-center items-center z-10 bg-[#fff]`}
@@ -270,10 +264,14 @@ const DetailDash = () => {
             <span
               className=""
               onClick={(e) => {
-                if (stateOrder == 4) {
-                  handleChangeState(5);
+                if (stateOrder == 5) {
+                  handleChangeState(6);
                 } else {
-                  toast.warn("Hãy xác nhận theo trình tự!");
+                  if (stateOrder == 6) {
+                    toast.warn("Đã trả hàng!");
+                  } else {
+                    toast.warn("Hãy chứng mình giao hàng khách không nhận!");
+                  }
                 }
               }}
             >
@@ -373,7 +371,7 @@ const DetailDash = () => {
           <div className="flex w-[30%]">
             <div className="flex flex-col gap-4 w-full">
               <h1>Trạng thái đơn hàng</h1>
-              {timeOrder.reverse().map((el, index) => (
+              {timeOrder?.reverse().map((el, index) => (
                 <div
                   key={index}
                   className="flex w-full text-[10px] items-center"
@@ -383,8 +381,8 @@ const DetailDash = () => {
                     size={20}
                   />
 
-                  <span className="w-[30%]">{el.time}</span>
-                  <span className="w-[60%]">{el.state}</span>
+                  <span className="w-[30%]">{el.time_status}</span>
+                  <span className="w-[60%]">{el.status_name}</span>
                 </div>
               ))}
               {/* <div className="flex w-full text-[10px] items-center">
@@ -441,7 +439,7 @@ const DetailDash = () => {
             </div>
           </div>
         </div>
-
+        {console.log(bills[0].status)}
         <div className="w-full border-separate border-b-2 border-gray-500"></div>
         <div className="flex justify-end">
           <h1 className="text-[16px] text-gray-600">Giao hàng bởi</h1>

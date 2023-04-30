@@ -63,7 +63,12 @@ const FillInfo = () => {
         date: formattedDate,
         address: inputAddress,
         address_option: addressToBill,
-        status: "Đơn hàng đã đặt",
+        status: [
+          {
+            time_status: formattedDate,
+            status_name: "Đơn hàng đã đặt"
+          }
+        ],
       };
       const detail_bills_add = [];
       for (let i = 0; i < carts.length; i++) {

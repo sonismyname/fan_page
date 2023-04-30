@@ -7,7 +7,7 @@ const Public = () => {
     <div className="flex flex-col overflow-x-hidden bg-gray-200">
       <Header />
       <Outlet></Outlet>
-      {/* <Footer></Footer> */}
+      <Footer></Footer>
     </div>
   );
 };

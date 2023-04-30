@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import icons from "../../utils/icons";
 import Scrollbars from "react-custom-scrollbars-2";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +13,23 @@ const Order = () => {
     AiFillFilter,
     BiCommentDetail,
   } = icons;
+  const [bills_data, setBillsData] = useState(null);
+  const [detail_bills_data, setDetailBillsData] = useState(null);
+  const stateString = {
+    1: "Đơn hàng đã đặt",
+    2: "Đóng gói đơn hàng",
+    3: "Đã giao cho đơn vị vận chuyển",
+    4: "Đang giao hàng",
+    6: "Trả hàng",
+    5: "Giao hàng thành công",
+  };
+  // useEffect(() => {
+  //   const myState = JSON.parse(localStorage.getItem("persist:data_base_fake"));
+  //   const data_bills = JSON.parse(myState.bills) 
+  //   console.log(data_bills);
+  //   setBills(data_bills)
+  //   setDetailBills(JSON.parse(myState.detail_bills))
+  // }, []);
   const { bills, detail_bills } = useSelector((state) => state.app);
   return (
     <div className="flex flex-col gap-4">
@@ -58,7 +75,9 @@ const Order = () => {
                 className="flex mt-2 cursor-pointer text-center hover:bg-main-300 border border-gray-300 hover:shadow-lg rounded-md items-center text-[#622323] group"
               >
                 <img
-                  src={`${process.env.PUBLIC_URL}/${detail_bills?.filter((dt) => dt.id === el.id)[0].img[0]}`}
+                  src={`${process.env.PUBLIC_URL}/${
+                    detail_bills?.filter((dt) => dt.id === el.id)[0].img[0]
+                  }`}
                   alt="ảnh sản phẩm"
                   className="w-[10%] h-15 object-contain"
                 ></img>
@@ -67,10 +86,18 @@ const Order = () => {
                     ?.filter((dt) => dt.id_bill === el.id)
                     .map((dtb) => `${dtb.name}, `)}
                 </span>
-                <span className="w-[30%]">{detail_bills.filter(dt => dt.id_bill === el.id).map((element, elI) => {
-                  return `${element.quatity} x ${(element.price * 1000).toLocaleString("vi-VN")}, `
-                })} vnđ</span>
-                <span className="w-[25%]">{el.status}</span>
+                <span className="w-[30%]">
+                  {detail_bills
+                    .filter((dt) => dt.id_bill === el.id)
+                    .map((element, elI) => {
+                      return `${element.quatity} x ${(
+                        element.price * 1000
+                      ).toLocaleString("vi-VN")}, `;
+                    })}{" "}
+                  vnđ
+                </span>
+                {console.log(el.status)}
+                <span className="w-[25%]">{stateString[el.status.length]}</span>
                 <div
                   onClick={(e) => navigate(`/dashboard/detail/${el.id}`)}
                   className="hidden items-center justify-center w-[5%] gap-2 group-hover:flex"

@@ -59,10 +59,20 @@ const appReducer = (state = initState, action) => {
         materials: [...state.materials, ...action.materials] || null,
       };
     }
+    // action.payload.status, status_update_date: action.payload.status_update_date
     case actionTypes.CHANGE_STATUS: {
       const updateBills = state.bills.map((item) => {
         if (item.id == action.payload.id) {
-          return { ...item, status: action.payload.status };
+          return {
+            ...item,
+            status: [
+              ...item.status,
+              {
+                time_status: action.payload.time_status,
+                status_name: action.payload.status_name,
+              },
+            ],
+          };
         } else {
           return item;
         }

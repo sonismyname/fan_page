@@ -10,7 +10,6 @@ const DetailDeliver = () => {
   const thumbRef = useRef();
   const {
     MdRequestPage,
-    SiCashapp,
     TbTruckDelivery,
     AiFillStar,
     AiOutlineDeliveredProcedure,
@@ -23,37 +22,34 @@ const DetailDeliver = () => {
     2: "Đóng gói đơn hàng",
     3: "Đã giao cho đơn vị vận chuyển",
     4: "Đang giao hàng",
-    5: "Trả hàng",
-    6: "Giao hàng thành công",
+    6: "Trả hàng",
+    5: "Giao hàng thành công",
   };
   const [stateOrder, setStateOrder] = useState(1);
+  const [statusTime, setStatusTime] = useState([]);
   const { bills } = useSelector((state) => state.app);
   useEffect(() => {
     const status = bills[id - 1].status;
-    if (status !== "Trả hàng") {
-      for (let key in stateString) {
-        if (stateString[key] === status) {
-          setStateOrder(key);
-        }
-      }
+    const status_state = status.length;
+    setStatusTime(status);
+    setStateOrder(status.length);
+    console.log(status.length);
+    if (status_state === 6) {
+      thumbRef.current.style.cssText = `right: ${25}%`;
     } else {
-      setStateOrder(4);
-    }
-    if (stateOrder != 6) {
-      const flow = 100 - 25 * (stateOrder - 1);
+      const flow = 100 - 25 * (status_state - 1);
       thumbRef.current.style.cssText = `right: ${flow}%`;
-    } else {
-      thumbRef.current.style.cssText = `right: ${0}%`;
     }
-  }, [stateOrder]);
-  console.log(stateOrder);
+  }, []);
   return (
     <div className="pt-[120px] px-5 py-10 m-auto w-[80%] flex flex-col gap-8 text-[#622323] text-[18px] bg-main-100">
       <BackArrow></BackArrow>
       <div className="flex justify-end gap-5 p-4 border-b border-[#622323]">
         <h1>Mã đơn hàng: {id}</h1>
         <span>|</span>
-        <h1>{bills[id - 1]?.status}</h1>
+        <h1>
+          {bills[id - 1]?.status[bills[id - 1]?.status.length - 1].status_name}
+        </h1>
       </div>
       <div className="flex justify-between text-gray-400 relative mx-[80px]">
         <div
@@ -102,7 +98,7 @@ const DetailDeliver = () => {
         </div>
         <div
           className={`border-4 rounded-full border-gray-500 w-[80px] h-[80px] ${
-            stateOrder == 6
+            stateOrder == 5
               ? "border-green-500 text-green-500"
               : "border-gray-500"
           } flex justify-center items-center z-10 bg-[#fff]`}
@@ -120,49 +116,18 @@ const DetailDeliver = () => {
       <div className="flex m-auto text-[18px] w-full">
         <div className="flex flex-col text-center w-[25%]">
           <h1>Đơn hàng đã đặt</h1>
-          <span className="text-gray-400 text-[12px]">
-            {bills[id - 1].date}
-          </span>
         </div>
         <div className="flex flex-col text-center w-[25%]">
           <h1>Đã đóng gói đơn hàng</h1>
-          {stateOrder > 1 ? (
-            <span className="text-gray-400 text-[12px]">
-              {bills[id - 1].date}
-            </span>
-          ) : (
-            <span className="text-gray-400 text-[12px]">----</span>
-          )}
         </div>
         <div className="flex flex-col text-center w-[25%]">
           <h1>Đã giao cho đơn vị vận chuyển</h1>
-          {stateOrder > 2 ? (
-            <span className="text-gray-400 text-[12px]">
-              {bills[id - 1].date}
-            </span>
-          ) : (
-            <span className="text-gray-400 text-[12px]">----</span>
-          )}
         </div>
         <div className="flex flex-col text-center w-[25%]">
           <h1>Đang giao hàng</h1>
-          {stateOrder > 3 ? (
-            <span className="text-gray-400 text-[12px]">
-              {bills[id - 1].date}
-            </span>
-          ) : (
-            <span className="text-gray-400 text-[12px]">----</span>
-          )}
         </div>
         <div className="flex flex-col text-center w-[25%]">
           <h1>Giao hàng thành công</h1>
-          {stateOrder > 4 ? (
-            <span className="text-gray-400 text-[12px]">
-              {bills[id - 1].date}
-            </span>
-          ) : (
-            <span className="text-gray-400 text-[12px]">----</span>
-          )}
         </div>
       </div>
       <div className="flex flex-col gap-4 text-center items-end">
@@ -191,18 +156,20 @@ const DetailDeliver = () => {
           {/* Đây là trạng thái cuối cùng */}
           <Scrollbars className="w-full" style={{ width: "100%", height: 400 }}>
             {/* Đây là trạng thái đã qua  */}
-
-            <div className="flex text-[16px] w-full items-center text-gray-500">
-              <AiOutlineCheckCircle className="w-[10%]" size={20} />
-              <span className="w-[20%]">16:00 12/12/2023</span>
-              <span className="w-[70%]">Đơn hàng được giao đến kho A</span>
-            </div>
+            {console.log(bills[0])}
             {/* Trạng thái đầu tiên */}
-            <div className="flex text-[16px] w-full items-center text-gray-500">
-              <AiOutlineCheckCircle className="w-[10%]" size={20} />
-              <span className="w-[20%]">16:00 12/12/2023</span>
-              <span className="w-[70%]">Đơn hàng đã đặt</span>
-            </div>
+            {statusTime?.reverse().map((elment, index) => {
+              return (
+                <div
+                  key={index}
+                  className="flex text-[16px] w-full items-center text-gray-500"
+                >
+                  <AiOutlineCheckCircle className="w-[10%]" size={20} />
+                  <span className="w-[20%]">{elment.time_status}</span>
+                  <span className="w-[70%]">{elment.status_name}</span>
+                </div>
+              );
+            })}
           </Scrollbars>
         </div>
       </div>

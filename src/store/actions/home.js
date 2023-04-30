@@ -34,7 +34,7 @@ export const addMaterial = (materials) => ({
   type: actionTypes.ADD_MATERIAL,
   materials: materials,
 });
-export const changeStatus = (id, status) => ({
+export const changeStatus = (id, status, date) => ({
   type: actionTypes.CHANGE_STATUS,
-  payload: {id, status: status}
+  payload: {id, status_name: status, time_status: date}
 });
