@@ -15,7 +15,7 @@ const FillInfo = () => {
   const [selectedDistrict, setSelectedDistrict] = useState("");
   const [wards, setWards] = useState([]);
   // information
-  const { users, bills, detail_bills, carts } = useSelector(
+  const { users, bills, detail_bills, carts, products } = useSelector(
     (state) => state.app
   );
 
@@ -82,6 +82,8 @@ const FillInfo = () => {
           quatity: carts[i].quatity,
         };
         detail_bills_add.push(detail_bill);
+        const new_quantity = products[carts[i].id_product - 1].quatity - carts[i].quatity;
+        dispatch(actions.updateQuatity(carts[i].id_product, new_quantity));
       }
       dispatch(actions.addDetailBills(detail_bills_add));
       dispatch(actions.buyProducts(bill));

@@ -13,6 +13,7 @@ const path = {
     STORE: "/dashboard/store/:slug",
     DETAIL_DELIVER_DASHBOARD: "/dashboard/detail/:id",
     CONFIRM_STATE: "/dashboard/detail/:id/confirm",
-    APP_CHAT: "/chat"
+    APP_CHAT: "/chat",
+    TRA_HANG: "/trahang/:id"
 }
 export default path

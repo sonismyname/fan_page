@@ -10,6 +10,7 @@ const actionTypes = {
     ADD_MATERIAL: "ADD_MATERIAL",
     REMOVE_CART: "REMOVE_CART",
     CHANGE_STATUS: "CHANGE_STATUS",
+    UPDATE_QUATITY: "UPDATE_QUATITY",
 }
 
 export default actionTypes

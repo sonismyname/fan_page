@@ -82,6 +82,22 @@ const appReducer = (state = initState, action) => {
         bills: updateBills || null,
       };
     }
+    case actionTypes.UPDATE_QUATITY: {
+      const updateProducts = state.products.map((item) => {
+        if (item.id == action.payload.id) {
+          return {
+            ...item,
+            quatity: action.payload.quatity,
+          };
+        } else {
+          return item;
+        }
+      });
+      return {
+        ...state,
+        products: updateProducts || null,
+      };
+    }
     default:
       return state;
   }

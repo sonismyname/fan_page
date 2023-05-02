@@ -38,7 +38,7 @@ const DetailDash = () => {
   const [stateOrder, setStateOrder] = useState(1);
   const [showStateBox, setShowStateBox] = useState(false);
   const thumbRef = useRef();
-  const { bills } = useSelector((state) => state.app);
+  const { bills, detail_bills } = useSelector((state) => state.app);
   useEffect(() => {
     setTimeOrder(bills[id - 1].status);
     const status_state = bills[id - 1].status.length;
@@ -405,25 +405,33 @@ const DetailDash = () => {
               </div>
               <div className="flex w-full gap-5">
                 <label className="w-[50%] text-right">
-                  Số lượng x Đơn giá:{" "}
+                  Thành tiền:
                 </label>
-                <span className="w-[50%] text-left">1 x 1 000 000 vnđ</span>
+                <span className="w-[50%] text-left">
+                  {detail_bills
+                    ?.filter((dt) => dt.id_bill == id)
+                    .reduce((cur, pr) => {
+                      return cur + pr.price * pr.quatity * 1000;
+                    }, 15000)
+                    .toLocaleString("vi-VN")}{" "}
+                  vnđ
+                </span>
               </div>
               <div className="flex w-full gap-5">
                 <label className="w-[50%] text-right">
-                  Địa chỉ người nhận:{" "}
+                  Địa chỉ người nhận:
                 </label>
                 <span className="w-[50%] text-left">
-                  Hoàng Quốc Việt, Hà Nội
+                  {bills[id - 1].address_option}
                 </span>
               </div>
               <div className="flex w-full gap-5">
                 <label className="w-[50%] text-right">Số điện thoại: </label>
-                <span className="w-[50%] text-left">09582628xx</span>
+                <span className="w-[50%] text-left">0782452xxx</span>
               </div>
               <div className="flex w-full gap-5">
                 <label className="w-[50%] text-right">Thời gian đặt: </label>
-                <span className="w-[50%] text-left">Túi handmade</span>
+                <span className="w-[50%] text-left">{bills[id - 1].date}</span>
               </div>
               <span>Xác nhận ảnh giao hàng thành công</span>
               {/* "https://th.bing.com/th/id/OIP.FjLkalx51D8xJcpixUGJywHaE8?pid=ImgDet&rs=1" */}

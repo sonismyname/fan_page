@@ -38,3 +38,8 @@ export const changeStatus = (id, status, date) => ({
   type: actionTypes.CHANGE_STATUS,
   payload: {id, status_name: status, time_status: date}
 });
+
+export const updateQuatity = (id, quatity) => ({
+  type: actionTypes.UPDATE_QUATITY,
+  payload: {id, quatity: quatity}
+});

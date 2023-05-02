@@ -1,9 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
 import BackArrow from "./BackArrow";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import icons from "../../utils/icons";
 import Scrollbars from "react-custom-scrollbars-2";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import * as actions from "../../store/actions";
 
 const DetailDeliver = () => {
   const { id } = useParams();
@@ -16,6 +18,8 @@ const DetailDeliver = () => {
     IoLocationOutline,
     AiOutlineCheckCircle,
     BiPackage,
+    VscCheck,
+    VscChromeClose,
   } = icons;
   const stateString = {
     1: "Xác nhận đơn hàng",
@@ -27,7 +31,9 @@ const DetailDeliver = () => {
   };
   const [stateOrder, setStateOrder] = useState(1);
   const [statusTime, setStatusTime] = useState([]);
+  const dispatch = useDispatch();
   const { bills } = useSelector((state) => state.app);
+  const navigate = useNavigate();
   useEffect(() => {
     const status = bills[id - 1].status;
     const status_state = status.length;
@@ -41,15 +47,27 @@ const DetailDeliver = () => {
       thumbRef.current.style.cssText = `right: ${flow}%`;
     }
   }, []);
+  const [trahang, setTraHang] = useState(false);
+  const handleTraHang = () => {
+    if (stateOrder == 5) {
+      setTraHang(true);
+    } else {
+      toast.warning("Chưa thực hiện được yêu cầu!!!");
+    }
+  };
+  const handleDenyTraHang = () => {
+    setTraHang(false);
+  };
+  const handleConfirmTraHang = () => {
+    navigate(`/trahang/${id}`);
+  };
   return (
     <div className="pt-[120px] px-5 py-10 m-auto w-[80%] flex flex-col gap-8 text-[#622323] text-[18px] bg-main-100">
       <BackArrow></BackArrow>
       <div className="flex justify-end gap-5 p-4 border-b border-[#622323]">
         <h1>Mã đơn hàng: {id}</h1>
         <span>|</span>
-        <h1>
-          {bills[id - 1]?.status[bills[id - 1]?.status.length - 1].status_name}
-        </h1>
+        <h1>{stateString[bills[id - 1]?.status.length]}</h1>
       </div>
       <div className="flex justify-between text-gray-400 relative mx-[80px]">
         <div
@@ -134,9 +152,40 @@ const DetailDeliver = () => {
         <button className="border hover:shadow-lg bg-main-400 cursor-pointer text-[#fff] w-[30%] rounded-md py-1 px-2">
           Đã nhận hàng
         </button>
-        <button className="border hover:shadow-lg bg-main-100 cursor-pointer text-gray-400 w-[30%] rounded-md py-1 px-2">
+        <button
+          onClick={handleTraHang}
+          className="border hover:shadow-lg bg-main-100 cursor-pointer text-gray-400 w-[30%] rounded-md py-1 px-2"
+        >
           Yêu cầu trả hàng
         </button>
+        {trahang ? (
+          <div className="fixed flex flex-col top-0 right-0 left-0 bottom-0 w-[40%] h-[180px] border shadow-lg m-auto mt-[250px] rounded-[20px] bg-main-200 animate-slide-right z-40">
+            <div className="flex flex-col text-center gap-8 mt-5">
+              <h1 className="text-[20px] font-semibold">
+                Bạn xác nhận muốn trả hàng?
+              </h1>
+              {}
+              <div className="flex items-center justify-around">
+                <div
+                  onClick={handleConfirmTraHang}
+                  className="flex gap-1 text-green-600 cursor-pointer hover:shadow-lg px-2 py-1 rounded-md hover:text-[#fff] hover:bg-green-600"
+                >
+                  <VscCheck size={24} />
+                  <span>Xác thực</span>
+                </div>
+                <div
+                  onClick={handleDenyTraHang}
+                  className="flex gap-1 text-red-600 cursor-pointer hover:shadow-lg px-2 py-1 rounded-md hover:text-[#fff] hover:bg-red-600"
+                >
+                  <VscChromeClose size={24} />
+                  <span>Hủy bỏ</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
       <div className="w-full border-separate border-b-2 border-gray-500"></div>
       <div className="flex justify-end">

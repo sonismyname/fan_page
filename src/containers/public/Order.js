@@ -67,7 +67,7 @@ const Order = () => {
           </span>
         </div>
         {/* list đơn hàng */}
-        <Scrollbars style={{ width: "100%", height: 500 }}>
+        <Scrollbars style={{ width: "100%", height: 490 }}>
           {bills?.map((el, index) => {
             return (
               <div
