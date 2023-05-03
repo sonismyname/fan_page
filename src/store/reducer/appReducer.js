@@ -7,6 +7,7 @@ const initState = {
   detail_bills: [],
   carts: [],
   materials: [],
+  id_chat : 2,
 };
 
 const appReducer = (state = initState, action) => {
@@ -21,6 +22,18 @@ const appReducer = (state = initState, action) => {
       return {
         ...state,
         products: [...state.products, ...action.products] || null,
+      };
+    }
+    case actionTypes.PLUSID: {
+      return {
+        ...state,
+        id_chat: state.id_chat + 1,
+      };
+    }
+    case actionTypes.SETIDCHAT: {
+      return {
+        ...state,
+        id_chat: action.id_chat,
       };
     }
     case actionTypes.ADD_STORE: {

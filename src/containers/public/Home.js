@@ -13,7 +13,7 @@ const Home = () => {
   return (
     <div className="pt-[120px] px-5 h-[2000px] m-auto w-[80%] bg-main-100 flex flex-col gap-10 relative">
       <Carousel/>
-      <Chatbox/>
+      <Chatbox name='Người mua'/>
       <div className="flex flex-col gap-5 relative hover:shadow-lg rounded-lg">
         <img
           src={`${process.env.PUBLIC_URL}/sp1.png`}

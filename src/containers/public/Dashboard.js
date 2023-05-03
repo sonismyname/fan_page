@@ -60,7 +60,7 @@ const Dashboard = () => {
       <div className="flex-1 bg-main-100 px-[80px] py-10">
         <Outlet></Outlet>
       </div>
-      <Chatbox></Chatbox>
+      <Chatbox name='ADMIN'></Chatbox>
 
       {/* Toggle button */}
       <span

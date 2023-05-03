@@ -28,7 +28,7 @@ export const addCart = (product) => ({
   cart: product,
 });
 export const removeCart = () => ({
-  type: actionTypes.REMOVE_CART
+  type: actionTypes.REMOVE_CART,
 });
 export const addMaterial = (materials) => ({
   type: actionTypes.ADD_MATERIAL,
@@ -36,10 +36,18 @@ export const addMaterial = (materials) => ({
 });
 export const changeStatus = (id, status, date) => ({
   type: actionTypes.CHANGE_STATUS,
-  payload: {id, status_name: status, time_status: date}
+  payload: { id, status_name: status, time_status: date },
 });
 
 export const updateQuatity = (id, quatity) => ({
   type: actionTypes.UPDATE_QUATITY,
-  payload: {id, quatity: quatity}
+  payload: { id, quatity: quatity },
+});
+export const plusIdChat = () => ({
+  type: actionTypes.PLUSID,
+});
+
+export const setIdChat = (id) => ({
+  type: actionTypes.SETIDCHAT,
+  id_chat: id,
 });
