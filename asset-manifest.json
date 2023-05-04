@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/sonismyname/fan_page/static/css/main.92b89ae3.css",
+    "main.js": "/sonismyname/fan_page/static/js/main.5993e0ed.js",
+    "static/media/slick.svg": "/sonismyname/fan_page/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/sonismyname/fan_page/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/sonismyname/fan_page/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "/sonismyname/fan_page/static/media/slick.295183786cd8a1389865.woff",
+    "index.html": "/sonismyname/fan_page/index.html",
+    "main.92b89ae3.css.map": "/sonismyname/fan_page/static/css/main.92b89ae3.css.map",
+    "main.5993e0ed.js.map": "/sonismyname/fan_page/static/js/main.5993e0ed.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.92b89ae3.css",
+    "static/js/main.5993e0ed.js"
+  ]
+}
